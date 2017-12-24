@@ -3,7 +3,7 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: 01-01-Porker.py
+@file: 01-01-porker.py
 @time: 2017/12/5 21:42
 @version: v1.0
 """
@@ -25,6 +25,7 @@ class FrenchDeck:
         self._cards = [Card(rank, suit)
                        for rank in self.ranks
                        for suit in self.suits]
+
     # Python魔术方法：http://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html
     def __len__(self):
         return len(self._cards)
@@ -49,9 +50,9 @@ if __name__ == "__main__":
 
     from random import choice, shuffle
 
+    print choice(deck)   # 选择一个元素
     print choice(deck)
-    print choice(deck)
-    shuffle(deck)
+    shuffle(deck)   # 打乱列表顺序
     print deck[:10]
     shuffle(deck)
     print deck[:10]

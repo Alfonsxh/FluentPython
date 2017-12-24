@@ -4,7 +4,7 @@
 @author: Alfons
 @contact: alfons_xh@163.com
 @file: __init__.py.py
-@time: 2017/12/5 21:41
+@time: 2017/12/24 21:24
 @version: v1.0 
 """
 import sys
@@ -15,6 +15,6 @@ sys.setdefaultencoding('utf-8')
 
 def __doc__():
     return """
-    01-01 实现一个纸牌模型，魔术方法
-    01-02 实现一个向量
+    02-01 列表推导（list comprehension）及生成器表达式（generator expression）
+    
     """

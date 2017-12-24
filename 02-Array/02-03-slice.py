@@ -3,8 +3,8 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: __init__.py.py
-@time: 2017/12/5 21:41
+@file: 02-03-slice.py
+@time: 2017/12/24 22:40
 @version: v1.0 
 """
 import sys
@@ -12,9 +12,4 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
-def __doc__():
-    return """
-    01-01 实现一个纸牌模型，魔术方法
-    01-02 实现一个向量
-    """
+# 切片
