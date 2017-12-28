@@ -40,9 +40,9 @@ class Vector:
 if __name__ == "__main__":
     vec_a = Vector(1, 3)
     vec_b = Vector(5, 1)
-    print vec_a, vec_b
+    print(vec_a, vec_b)
     vec_c = vec_a + vec_b
-    print vec_c
+    print(vec_c)
     vec_d = vec_a * vec_b
-    print vec_d
+    print(vec_d)
     pass

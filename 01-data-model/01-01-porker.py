@@ -42,18 +42,18 @@ class FrenchDeck:
 
 if __name__ == "__main__":
     card = Card(7, "hearts")
-    print card
+    print(card)
 
     deck = FrenchDeck()
-    print len(deck)
-    print deck[5]
+    print(len(deck))
+    print(deck[5])
 
     from random import choice, shuffle
 
-    print choice(deck)   # 选择一个元素
-    print choice(deck)
+    print(choice(deck))   # 选择一个元素
+    print(choice(deck))
     shuffle(deck)   # 打乱列表顺序
-    print deck[:10]
+    print(deck[:10])
     shuffle(deck)
-    print deck[:10]
+    print(deck[:10])
     pass

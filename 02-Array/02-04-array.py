@@ -18,14 +18,14 @@ from random import random
 
 # float_count = 10**7
 # float_array = array('d', (random() for i in range(float_count)))
-# print float_array[-1]
-# print len(float_array)
+# print(float_array[-1])
+# print(len(float_array))
 # with open("floats.bin", "wb") as f:
 #     float_array.tofile(f)
 #
 # float_array_2 = array('d')
 # with open("floats.bin", "rb") as f:
 #     float_array_2.fromfile(f, float_count)
-# print float_array_2[-1]
-# print len(float_array_2)
+# print(float_array_2[-1])
+# print(len(float_array_2))
 # pass
