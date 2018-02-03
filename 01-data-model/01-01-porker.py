@@ -7,11 +7,6 @@
 @time: 2017/12/5 21:42
 @version: v1.0
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 from collections import namedtuple
 
 Card = namedtuple("Card", ["rank", "suit"])

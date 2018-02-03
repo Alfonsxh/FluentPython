@@ -7,10 +7,6 @@
 @time: 2017/12/11 22:13
 @version: v1.0
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 from math import hypot
 
 

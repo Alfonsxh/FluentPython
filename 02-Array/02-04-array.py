@@ -7,11 +7,6 @@
 @time: 2017/12/27 20:35
 @version: v1.0 
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 # 数组
 from array import array
 from random import random

@@ -7,11 +7,6 @@
 @time: 2017/12/24 21:26
 @version: v1.0 
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 # 列表推导
 symbols = "@#$%^&*()_+{}[]:';>?<?>'"
 codes = [ord(symbols) for symbols in symbols]

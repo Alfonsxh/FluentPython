@@ -7,11 +7,6 @@
 @time: 2017/12/24 22:40
 @version: v1.0
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 # 切片
 s = "bicycle"
 slice_a = s[::3]

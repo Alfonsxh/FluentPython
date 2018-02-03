@@ -7,11 +7,6 @@
 @time: 2017/12/24 22:17
 @version: v1.0 
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 # 元组
 # 把元组用作记录
 lax_coordinate = (21.321321, 32.12321321)  # 记录经纬度
