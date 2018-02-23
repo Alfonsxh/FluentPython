@@ -78,5 +78,22 @@ print('\n' * 2)
 # 仅限关键字(keyword-only argument)
 print("*" * 32 + "仅限关键字(keyword-only argument)" + "*" * 32)
 
-print(":".rjust(30), )
-print("*" * 32 + "" + "*" * 32)
+
+# HTML标签生成
+def tag(name, *content, cls=None, **attrs):
+    if cls:
+        attrs['class'] = cls
+    if attrs:
+        attr_str = "".join(" %s = %s" % (attr, value) for attr, value in sorted(attrs.items()))
+    else:
+        attr_str = ""
+
+    if content:
+        return "\n".join("<%s %s>%s</%s>" % (name, attr_str, c, name) for c in content)
+    else:
+        return "<%s %s/>" % (name, attr_str)
+
+
+print('tag("img", "hello", "world", cls="", hight=1024, width=768):\n', tag("img", "hello", "world", cls="", hight=1024, width=768))
+print('\ntag("img", "hello", "world", **{"cls": "jpg", "high": 1024, "width": 768}):\n', tag("img", "hello", "world", **{"cls": "jpg", "high": 1024, "width": 768}))
+
