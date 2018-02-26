@@ -12,6 +12,7 @@ print("*" * 32 + "策略模式-函数实现" + "*" * 32)
 from collections import namedtuple
 
 Customer = namedtuple("Customer", "name integration")
+promos = []
 
 
 class Commodity:
@@ -51,11 +52,19 @@ class Order:
         return "<Order total:{:.2f}  due:{:.2f}>".format(self.total(), self.due())
 
 
+def Promotion(func):
+    """装饰器函数"""
+    promos.append(func)
+    return func
+
+
+@Promotion
 def FirstPromotion(order):  # 第一个具体策略
     """为积分为1000或以上的顾客提供5%折扣"""
-    return order.total() * 0.05 if order.customer.integration >= 1000 else 0
+    return order.total() * 0.1 if order.customer.integration >= 1000 else 0
 
 
+@Promotion
 def SecondPromotion(order):  # 第二个具体策略
     """单个商品为20个或以上时提供10%折扣"""
     discount = 0
@@ -65,6 +74,7 @@ def SecondPromotion(order):  # 第二个具体策略
     return discount
 
 
+@Promotion
 def ThirdPromotion(order):  # 第三个具体策略
     """订单中的不同商品达到10个或以上时提供7%折扣"""
     product_item = {item.name for item in order.carts}
@@ -73,10 +83,15 @@ def ThirdPromotion(order):  # 第三个具体策略
     return 0
 
 
+def BestPromotion(order):
+    """选择最好的打折方式"""
+    return max(promo(order) for promo in promos)
+
+
 joe = Customer('John Doe', 0)
 ann = Customer('Ann Smith', 1100)
 cart = [Commodity('banana', 4, .5),
-        Commodity('apple', 10, 1.5),
+        Commodity('apple', 20, 1.5),
         Commodity('watermellon', 5, 5.0)]
 
 print("""
@@ -93,6 +108,6 @@ print("\n")
 print("Order(ann, cart, FirstPromotion()):".rjust(35), Order(ann, cart, FirstPromotion))
 print("Order(ann, cart, SecondPromotion()):".rjust(35), Order(ann, cart, SecondPromotion))
 print("Order(ann, cart, ThirdPromotion()):".rjust(35), Order(ann, cart, ThirdPromotion))
-
-print(":".rjust(30), )
-print("*" * 32 + "" + "*" * 32)
+print("\n")
+print("Order(joe, cart, BestPromotion()):".rjust(35), Order(joe, cart, BestPromotion))
+print("Order(ann, cart, BestPromotion()):".rjust(35), Order(ann, cart, BestPromotion))
