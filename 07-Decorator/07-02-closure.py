@@ -12,7 +12,7 @@ print("*" * 32 + "python 闭包以及nonlocal关键字" + "*" * 32)
 
 
 # 使用类实现
-class Average():
+class Average:
     def __init__(self):
         self.series = []
 
@@ -26,7 +26,7 @@ print("avg1(10):".rjust(30), avg1(10))
 print("avg1(10.5):".rjust(30), avg1(10.5))
 print("avg1(11):".rjust(30), avg1(11))
 print("\n")
-
+ 
 
 # 使用函数实现
 def MakeAverage():
@@ -64,5 +64,3 @@ print("avg3(10):".rjust(30), avg3(10))
 print("avg3(10.5):".rjust(30), avg3(10.5))
 print("avg3(11):".rjust(30), avg3(11))
 
-print(":".rjust(30), )
-print("*" * 32 + "" + "*" * 32)
