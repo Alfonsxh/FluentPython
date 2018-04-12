@@ -38,6 +38,3 @@ def func1(lst):
 print("htmlize({1, 2, 3}:".rjust(30), htmlize({1, 2, 3}))
 print("""htmlize("helllo"):""".rjust(30), htmlize("helllo"))
 print(" htmlize(['jels', 54, {1, 2, 3}]):\n", htmlize(['jels', 54, {1, 2, 3}]))
-
-print(":".rjust(30), )
-print("*" * 32 + "" + "*" * 32)

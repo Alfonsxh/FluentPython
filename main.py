@@ -15,4 +15,9 @@ if __name__ == "__main__":
 
     _, filename = os.path.split('/home/luciano/.ssh/idrsa.pub')
     path_a = os.path.join("c:/sdf", "ds", "dsdds")
+
+    args_dict = {"time": "09:10", "day": "Mon"}
+    print(args_dict)
+
+    print(format(18, "b"))
     pass
