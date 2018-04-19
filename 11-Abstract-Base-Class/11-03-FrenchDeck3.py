@@ -3,20 +3,19 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: 01-01-porker.py
-@time: 2017/12/5 21:42
-@version: v1.0
+@file: 11-03-FrenchDeck.py
+@time: 18-4-18 下午9:35
+@version: v1.0 
 """
-from collections import namedtuple
+from collections import namedtuple, MutableSequence
+import traceback
+from random import shuffle
 
 Card = namedtuple("Card", ["rank", "suit"])
 
-# 鸭子类型：
-# 当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子。
-# 实现了__****__ 函数的类型
 
-
-class FrenchDeck:
+# FrenchDeck2，collections.MutableSequence的子类
+class FrenchDeck3(MutableSequence):
     ranks = [str(n) for n in range(2, 11)] + list("JQKA")
     suits = "spades diamonds clubs hearts".split()  # 4种花色
 
@@ -32,27 +31,19 @@ class FrenchDeck:
     def __getitem__(self, position):
         return self._cards[position]
 
-    def __setitem__(self, position, card):
-        self._cards[position] = card
-
     def __delitem__(self, position):
         del self._cards[position]
 
+    def insert(self, position, card):
+        self._cards.insert(position, card)
 
-if __name__ == "__main__":
-    card = Card(7, "hearts")
-    print(card)
+    def __setitem__(self, position, card):
+        self._cards[position] = card
 
-    deck = FrenchDeck()
-    print(len(deck))
-    print(deck[5])
 
-    from random import choice, shuffle
-
-    print(choice(deck))   # 选择一个元素
-    print(choice(deck))
-    shuffle(deck)   # 打乱列表顺序
-    print(deck[:10])
-    shuffle(deck)
-    print(deck[:10])
-    pass
+try:
+    deck2 = FrenchDeck3()
+    shuffle(deck2)
+    print("deck2 init success!")        # 补上__setitem__、insert方法后，无异常
+except:
+    traceback.print_exc()

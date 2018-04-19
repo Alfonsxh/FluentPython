@@ -13,6 +13,7 @@ import reprlib
 import numbers
 import operator
 import functools
+import itertools
 
 
 class Vector:
@@ -49,7 +50,8 @@ class Vector:
 
     def __eq__(self, other):  # 比较方案改进，适用于超长的数组
         # return tuple(self) == tuple(other)
-        return len(self) == len(other) and all(a == b for a, b in zip(self, other))  # zip返回两个迭代， all返回只有所有比较都为True，才返回True
+        return len(self) == len(other) and all(
+            a == b for a, b in zip(self, other))  # zip返回两个迭代， all返回只有所有比较都为True，才返回True
 
     def __hash__(self):
         hashes = (hash(x) for x in self)  # 使用了生成器，内部有yield产生参数
@@ -91,23 +93,47 @@ class Vector:
                 raise AttributeError(error.format(attr_name=name, cls_name=cls.__name__))
         super().__setattr__(name, value)
 
+    def angle(self, n):
+        r = math.sqrt(sum(x * x for x in self[n:]))
+        a = math.atan2(r, self[n - 1])
+        if (n == len(self) - 1) and (self[-1] < 0):
+            return math.pi * 2 - a
+        else:
+            return a
+
+    def angles(self):
+        return (self.angle(n) for n in range(1, len(self)))
+
+    def __format__(self, format_spec=""):
+        if format_spec.endswith('h'):
+            format_spec = format_spec[:-1]
+            coords = itertools.chain([abs(self)], self.angles())
+            outfm = "<{}>"
+        else:
+            coords = self
+            outfm = "({})"
+        components = (format(f, format_spec) for f in coords)
+        return outfm.format(",".join(components))
+
 
 vector_a = Vector([3.0, 4.0])
-print(vector_a)
-print(repr(vector_a))
+print("vector_a:", vector_a)
+print("repr(vector_a):", repr(vector_a))
 
 vector_b = Vector(range(1, 1000))
-print(repr(vector_b))
+print("repr(vector_b):", repr(vector_b))
 
-print(repr(vector_b[2]))
-print(repr(vector_b[2::2]))
-print(repr(vector_b[2:-1:2]))
-print(repr(vector_b[:10:2]))
+print("repr(vector_b[2]):", repr(vector_b[2]))
+print("repr(vector_b[2::2]):", repr(vector_b[2::2]))
+print("repr(vector_b[2:-1:2]):", repr(vector_b[2:-1:2]))
+print("repr(vector_b[:10:2]):", repr(vector_b[:10:2]))
 # print(repr(vector_b[1, 2]))   # 抛出异常e 4
 
-print(vector_b.x)
+print("vector_b.x:", vector_b.x)
 vector_b.X = 1000008
-print(repr(vector_b.X))
-print(hash(vector_b))
-print(vector_b == vector_b)
-print(vector_b == vector_a)
+print("repr(vector_b.X):", repr(vector_b.X))  # X仍可赋值
+print("hash(vector_b):", hash(vector_b))
+print("vector_b == vector_b:", vector_b == vector_b)
+print("vector_b == vector_a:", vector_b == vector_a)
+
+print("format(vector_b, 'h'):\n", format(vector_b, 'h'))

@@ -3,17 +3,14 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: 01-01-porker.py
-@time: 2017/12/5 21:42
-@version: v1.0
+@file: 11-01-FrenchDeck.py
+@time: 18-4-18 下午9:35
+@version: v1.0 
 """
 from collections import namedtuple
+from random import shuffle
 
 Card = namedtuple("Card", ["rank", "suit"])
-
-# 鸭子类型：
-# 当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子。
-# 实现了__****__ 函数的类型
 
 
 class FrenchDeck:
@@ -32,27 +29,26 @@ class FrenchDeck:
     def __getitem__(self, position):
         return self._cards[position]
 
-    def __setitem__(self, position, card):
-        self._cards[position] = card
+    #
+    # def __setitem__(self, position, card):
+    #     self._cards[position] = card
 
     def __delitem__(self, position):
         del self._cards[position]
 
 
-if __name__ == "__main__":
-    card = Card(7, "hearts")
-    print(card)
-
-    deck = FrenchDeck()
-    print(len(deck))
-    print(deck[5])
-
-    from random import choice, shuffle
-
-    print(choice(deck))   # 选择一个元素
-    print(choice(deck))
-    shuffle(deck)   # 打乱列表顺序
-    print(deck[:10])
+deck = FrenchDeck()
+try:
     shuffle(deck)
-    print(deck[:10])
-    pass
+except:
+    print("shuffle error!")
+
+
+# 打猴子补丁
+def set_card(deckSelf, position, card):
+    deckSelf._cards[position] = card        # 打补丁时，必须要知道deck对象中含有_cards属性
+
+
+FrenchDeck.__setitem__ = set_card
+shuffle(deck)
+print("shuffle success!")
