@@ -3,8 +3,7 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: 11-05-BingoCage.py
-@time: 18-4-19 下午8:29
+@file: __init__.py.py
+@time: 18-4-25 下午10:02
 @version: v1.0 
 """
-import random

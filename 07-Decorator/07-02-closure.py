@@ -52,7 +52,7 @@ def MakeAverage2():
 
     def Average2(new_value):
         nonlocal total, count  # nonlocal关键字将变量标记为自有变量
-        total += new_value
+        total += new_value   # 与total = total + new_value 一样，把total当成了局部变量
         count += 1
         return total / count
 

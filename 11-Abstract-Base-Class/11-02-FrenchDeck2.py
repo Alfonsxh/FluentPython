@@ -55,12 +55,15 @@ def insert(deck, position, card):
     deck._cards.insert(position, card)
 
 
+print("Before:", FrenchDeck2.__dict__)
+FrenchDeck2.__abstractmethods__ = None  # 将子类中的__abstractmethods__方法置空，可以使用猴子补丁。
 FrenchDeck2.__setitem__ = setitem
 FrenchDeck2.insert = insert
+print("After:", FrenchDeck2.__dict__)
 
 try:
     deck3 = FrenchDeck2()
     shuffle(deck3)
     print("deck3 init success!")
 except:
-    traceback.print_exc()  # 抽象基类的子类无法通过猴子补丁的方式更新类的抽象方法
+    traceback.print_exc()  # 抽象基类的子类无法通过猴子补丁的方式更新类的抽象方法，在于关键字__abstractmethods__
