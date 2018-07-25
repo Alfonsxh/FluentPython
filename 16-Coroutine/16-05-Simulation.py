@@ -5,17 +5,19 @@
 @time: 18-7-24 下午10:45
 @version: v1.0 
 """
-# 离散事件仿真
+# 离散事件仿真----模拟出租车服务
 import random
 import collections
 import queue
 
+# 默认值
 DEFAULT_NUMBER_OF_TAXIS = 3
 DEFAULT_END_TIME = 180
 SEARCH_DURATION = 5
 TRIP_DURATION = 20
 DEPARTURE_INTERVAL = 5
 
+# 动作枚举
 LEAVE_ACTION = "leave garage"
 DROP_ACTION = "drop off passenger"
 PICK_ACTION = "pick up passenger"
@@ -60,8 +62,8 @@ def compute_duration(previous_action):
 class Simulation:
 
     def __init__(self, process_map):
-        self.events = queue.PriorityQueue()
-        self.procs = dict(process_map)
+        self.events = queue.PriorityQueue()     # 优先队列，如果是tuple元素，则按tuple的第一个元素排序
+        self.procs = dict(process_map)          # 避免修改self.procs时同时修改process_map！！
 
     def run(self, end_time):
         for _, proc in sorted(self.procs.items()):
@@ -77,15 +79,17 @@ class Simulation:
             current_event = self.events.get()
             sim_time, proc_id, previous_action = current_event
             print("taxi:", proc_id, proc_id * "    ", current_event)
-            active_proc = self.procs[proc_id]
-            next_time = sim_time + compute_duration(previous_action)  # 使用指数分布计算操作的耗时
+
+            active_proc = self.procs[proc_id]           # 获取指定出租车的进程
+            next_time = sim_time + compute_duration(previous_action)  # 使用指数分布计算操作的耗时，算出下一事件发生的事件
             try:
-                next_event = active_proc.send(next_time)
+                next_event = active_proc.send(next_time)            # 执行此次事件，更新下次事件
             except StopIteration:
-                del self.procs[proc_id]
+                del self.procs[proc_id]         # 将任务完成的出租车剔除队列
             else:
-                self.events.put(next_event)
+                self.events.put(next_event)     # 将下一个时间put进队列
         else:
+            # 打印结束时间后仍未完成任务的出租车数
             print("end of simulation time: {} events pending.".format(self.events.qsize()))
 
 
@@ -93,6 +97,7 @@ def main(end_time=DEFAULT_END_TIME, num_taxis=DEFAULT_NUMBER_OF_TAXIS, seed=None
     if seed is not None:
         random.seed(seed)
 
+    # 初始化出租车的状态
     taixs = {i: taxi_process(i, (i + 1) * 2, i * DEPARTURE_INTERVAL) for i in range(num_taxis)}
 
     sim = Simulation(taixs)
