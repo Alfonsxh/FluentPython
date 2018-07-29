@@ -37,12 +37,14 @@ def simple_coroutine2(a):
     print("-> Received: b = ", b)
     c = yield a + b
     print("-> Received: c = ", c)
+    return c
 
 
 my_cor2 = simple_coroutine2(1)
 print("my_cor2 state -> ", inspect.getgeneratorstate(my_cor2))
 
 print("\nmy_cor2 -> ", my_cor2)
+print("next(my_cor2) - > ", next(my_cor2))         # 激活， 执行yield a，返回a的值。
 print("next(my_cor2) - > ", next(my_cor2))         # 激活， 执行yield a，返回a的值。
 print("my_cor2 state -> ", inspect.getgeneratorstate(my_cor2))
 
@@ -53,7 +55,8 @@ print("\n")
 
 try:
     print("\nmy_cor2.send(21) - > ", my_cor2.send(21))  # 产生StopIteration异常，并不会打印此内容
-except StopIteration:
+except StopIteration as e:
     print("cor StopIteration!")
+    print("e = ", e)
 
 print("my_cor2 state -> ", inspect.getgeneratorstate(my_cor2))

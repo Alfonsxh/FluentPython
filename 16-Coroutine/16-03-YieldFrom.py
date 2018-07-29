@@ -18,8 +18,7 @@ def gen0():
         yield num
 
 
-genList = list(gen0())
-print(genList)
+print(list(gen0()))
 
 
 def gen():
@@ -27,5 +26,4 @@ def gen():
     yield from range(7)
 
 
-genList = list(gen())
-print(genList)
+print(list(gen()))
