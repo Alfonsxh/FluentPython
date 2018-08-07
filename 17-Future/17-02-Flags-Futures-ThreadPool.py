@@ -17,7 +17,7 @@ DEST_DIR = "flags_futures_thread/"
 
 FLAGS_CC = 'CN IN US ID BR PK NG BD RU JP MX PH VN ET EG DE IR TR CD FR'.split()
 
-MAX_WORLERS = 4
+MAX_WORLERS = 20
 
 
 def SaveFlag(img, filename):
