@@ -70,8 +70,8 @@ def DownloadFlags(flagList: list):
     :return: 下载旗帜的数量
     """
     loop = asyncio.get_event_loop()  # 返回底层的事件驱动
-    toDo = [DownloadOne(cc) for cc in flagList]  # 构建单个下载的生成器队列
-    waitWorker = asyncio.wait(toDo)  # 等待传进来的协程列表都结束
+    toDoList = [DownloadOne(cc) for cc in flagList]  # 构建单个下载的生成器队列
+    waitWorker = asyncio.wait(toDoList)  # 等待传进来的协程列表都结束
     complete, notComplete = loop.run_until_complete(waitWorker)  # 方法驱动，直到所有的任务都结束
 
     loop.close()
