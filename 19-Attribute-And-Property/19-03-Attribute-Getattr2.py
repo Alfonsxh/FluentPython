@@ -6,8 +6,6 @@
 @version: v1.0 
 """
 
-# __new__方法介绍：https://www.cnblogs.com/ifantastic/p/3175735.html
-
 import os
 import requests
 import json
@@ -36,7 +34,7 @@ def Load():
 
 
 class FrozenJSON:
-    def __init__(self, mapping):    # __init__初始化属性
+    def __init__(self, mapping):  # __init__初始化属性
         self.__data = dict()
         for key, value in mapping.items():  # 防止含有关键字的键值对
             if keyword.iskeyword(key):  # 判断是否是python关键字
@@ -50,10 +48,10 @@ class FrozenJSON:
             res = FrozenJSON(self.__data[name])
             return res
 
-    def __new__(cls, arg):      # 使用__new__替代build函数,__new__产生实例
+    def __new__(cls, arg):  # 使用__new__替代build函数,__new__产生实例
         if isinstance(arg, abc.Mapping):
             # return cls(obj)
-            return super().__new__(cls)         # 返回FrozenJSON的实例
+            return super().__new__(cls)  # 返回FrozenJSON的实例
         elif isinstance(arg, abc.MutableSequence):
             return [cls(item) for item in arg]
         else:

@@ -7,6 +7,8 @@
 """
 
 
+# __new__方法介绍：https://www.cnblogs.com/ifantastic/p/3175735.html
+
 # __new__ 是类的一个方法，在实例化类时，在调用__init__之前，会调用__new__方法。
 # - 通常来说，新式类开始实例化时，__new__()方法会返回cls（cls指代当前类）的实例，
 #   然后该类的__init__()方法作为构造方法会接收这个实例（即self）作为自己的第一个参数，
@@ -72,7 +74,7 @@ print(bar1.__dict__)
 # ---------------------------------------例三--------------------------------------------
 
 class Foo2(object):
-    def __init__(self, *args, **kwargs):        # Foo2中没有__new__方法，类的属性均在__init__方法中赋值
+    def __init__(self, *args, **kwargs):  # Foo2中没有__new__方法，类的属性均在__init__方法中赋值
         self.x = args[0]
         self.args = args
         self.kwargs = kwargs
@@ -84,7 +86,7 @@ print(foo2.__dict__)
 
 
 class Bar2(Foo2):
-    def __init__(self, *args, **kwargs):        # Bar2类，重载了父类的__init__方法，使得父类的属性x、args、kwargs在子类中不存在了
+    def __init__(self, *args, **kwargs):  # Bar2类，重载了父类的__init__方法，使得父类的属性x、args、kwargs在子类中不存在了
         self.bar_args = args
         self.bar_kwargs = kwargs
 
