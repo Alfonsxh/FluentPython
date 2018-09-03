@@ -22,6 +22,7 @@ class Foo(object):
         return self
 
     def __init__(self, *args, **kwargs):  # 初始化方法，self中已经添加了属性x
+        print("vars(self) -> ", vars(self))
         self.args = args
         self.kwargs = kwargs
 

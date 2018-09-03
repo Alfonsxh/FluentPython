@@ -37,8 +37,21 @@ class LineItem2(LineItem):
         else:
             raise ValueError("value must be > 0")
 
+    def GetPrice(self):
+        return self.__price
 
-# raisins2 = LineItem2('Golden raisins', 0, 6.0)
+    def SetPrice(self, value):
+        if value > 0:
+            self.__price = value
+        else:
+            raise ValueError("value must be > 0")
+
+    price = property(GetPrice, SetPrice)
+
+
+raisins2 = LineItem2('Golden raisins', 10, 6.0)
+print(vars(raisins2))
+print((raisins2.weight, raisins2.price))
 
 
 # ----------------------------------------改进二------------------------------------------

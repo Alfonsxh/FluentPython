@@ -8,7 +8,7 @@
 
 
 # --------------------------------------例一------------------------------------------------
-class Quantity:
+class Quantity:  # 描述符类
     def __init__(self, storage_name):
         self.storage_name = storage_name
 
@@ -19,20 +19,21 @@ class Quantity:
         :param value: 需要设置的值
         :return:
         """
+        print("Attritube '{}' use Quantity class.__set__ set value.".format(self.storage_name))
         if value > 0:
             instance.__dict__[self.storage_name] = value  # 在托管实例的字典表中添加对应的属性值
         else:
             raise ValueError("value must be > 0.")
 
 
-class LineItem:
-    weight = Quantity("weight")
-    price = Quantity("price")
+class LineItem:  # 托管类
+    weight = Quantity("weight")  # 描述符实例
+    price = Quantity("price")  # 描述符实例
 
     def __init__(self, description, weight, price):
-        self.descript = description
-        self.weight = weight
-        self.price = price
+        self.descript = description  # 存储属性
+        self.weight = weight  # 托管属性
+        self.price = price  # 托管属性
 
     def Subtotal(self):
         return self.weight * self.price

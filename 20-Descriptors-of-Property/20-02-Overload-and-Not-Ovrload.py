@@ -79,18 +79,25 @@ obj = Manager()
 print("\n 覆盖型 __get__ and __set__:")
 obj.override  # -> Overload.__get__(<Overload object>,<Manager object>,<class Manager>)
 Manager.override  # -> Overload.__get__(<Overload object>,None,<class Manager>)
+
+print("Before set override -> ", obj.__dict__)
 obj.override = 7  # -> Overload.__set__(<Overload object>,<Manager object>,7)
 obj.override  # -> Overload.__get__(<Overload object>,<Manager object>,<class Manager>)
-print(obj.__dict__)  # {},此时实例中没有override属性
-obj.__dict__["over"] = 9  # 通过__dict__给over赋值，不触发__set__方法
-print(obj.__dict__)  # {'over': 9},__dict__中含有了override属性
+print("After set override -> ", obj.__dict__)  # {},此时实例中没有override属性
+
+obj.__dict__["override"] = 9  # 通过__dict__给override赋值，不触发__set__方法
+print(obj.__dict__)  # {'override': 9},__dict__中含有了override属性
 obj.override  # -> Overload.__get__(<Overload object>,<Manager object>,<class Manager>),但取实例属性时，实际上仍取的是类的属性，触发__get__方法
 
 print("\n 无get覆盖型 __get__ and __set__:")
-print(obj.overrideNonGet)  # <__main__.OverloadNotGet object at 0x7f0bdd21eba8>, 类未实现__get__方法，直接获取的描述符的实例
-print(Manager.overrideNonGet)  # <__main__.OverloadNotGet object at 0x7f0bdd21eba8>
+obj.overrideNonGet  # <__main__.OverloadNotGet object at 0x7f0bdd21eba8>, 类未实现__get__方法，直接获取的描述符的实例
+Manager.overrideNonGet  # <__main__.OverloadNotGet object at 0x7f0bdd21eba8>
+
+print("Before set overrideNonGet -> ", obj.__dict__)
 obj.overrideNonGet = 7  # -> OverloadNotGet.__set__(<OverloadNotGet object>,<Manager object>,7)
 print(obj.overrideNonGet)  # <__main__.OverloadNotGet object at 0x7f0bdd21eba8>
+print("After set nonOverride -> ", obj.__dict__)
+
 obj.__dict__["overrideNonGet"] = 8
 print("obj.overrideNonGet -> ", obj.overrideNonGet)  # obj.overrideNonGet ->  8,overrideNonGet描述符中没有__get__方法，所以不触发，直接返回属性的值
 
@@ -101,11 +108,11 @@ print("Before set nonOverride -> ", obj.__dict__)  # Before set nonOverride ->  
 obj.nonOverride = 9  # 没有实现__set__方法
 print(obj.nonOverride)  # ...取值时不触发__get__方法    # 9
 print("After set nonOverride -> ", obj.__dict__)  # After set nonOverride ->  {'over': 9, 'overrideNonGet': 8, 'nonOverride': 9}
+
+print(obj.nonOverride)      # -> 9
 Manager.nonOverride  # -> NonOverload.__get__(<NonOverload object>,None,<class Manager>)
 
 print("\n方法是非覆盖型描述符：")
 print(obj.test)  # 实例获取的是绑定方法的对象 # <bound method Manager.test of <__main__.Manager object at 0x7f0bdd21ec50>>
 print(Manager.test)  # 类获取的是函数  # <function Manager.test at 0x7f0bde8149d8>
 
-import collections
-collections.Iterator
