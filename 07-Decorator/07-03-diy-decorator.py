@@ -9,7 +9,7 @@
 """
 import time
 import functools
-from clockdeco_demo import clock_one, clock_two, clock_third
+from .clockdeco_demo import clock_one, clock_two, clock_third
 
 
 @clock_one
